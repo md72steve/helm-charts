@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: steve72-ui
+  labels:
+    app: steve72-ui
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: steve72-ui
+  template:
+    metadata:
+      labels:
+        app: steve72-ui
+    spec:
+      containers:
+        - name: steve72-ui
+          image: "{{ .Values.dockerImage }}"
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 8080

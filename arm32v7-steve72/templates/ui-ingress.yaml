@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: steve72-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: steve72.de
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: steve72-ui-service
+              servicePort: 8080

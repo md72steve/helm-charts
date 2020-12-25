@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karmabot-api
+  labels:
+    app: karmabot-api
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: karmabot-api
+  template:
+    metadata:
+      labels:
+        app: karmabot-api
+    spec:
+      containers:
+        - name: karmabot-api
+          image: "{{ .Values.dockerImage }}"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: SLACK_BOT_USER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: karmabot-secrets
+                  key: slack.bot.user.token
+            - name: MONGODB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: karmabot-secrets
+                  key: mongodb.user
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: karmabot-secrets
+                  key: mongodb.password
+            

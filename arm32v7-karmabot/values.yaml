@@ -1,0 +1,2 @@
+dockerImage: schlupp2002/arm32v7-karmabot-api:latest
+replicas: 3

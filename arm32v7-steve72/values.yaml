@@ -1,0 +1,2 @@
+dockerImage: schlupp2002/arm32v7-steve72-ui:latest
+replicas: 3
